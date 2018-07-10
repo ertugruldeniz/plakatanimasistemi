@@ -1,0 +1,6 @@
+1- main.py dosyası çalıştırılır.
+2- Menden seçim işlemi yapılır 1 veya 2 
+3- Resim klasörü içerisindeki resim adı uzantısı ile beraber yazılarak plaka yeri bulunur.
+
+
+Sürüm: Python3 - Opencv 3.3
