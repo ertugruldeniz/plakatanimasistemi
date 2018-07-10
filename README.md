@@ -3,6 +3,6 @@ Plaka Tanıma Sistemi
 
 Proje Python3 ve OpenCv 3.3 sürümü kullanılarak yapılmıştır.
 
-- [Notice: Plaka Tanıma Sistemi Programı Kullanımı Hakkında Bilgi] (https://github.com/ertugruldeniz/plakatanimasistemi/blob/master/Kullan%C4%B1m%C4%B1)
+- [ Notice: Plaka Tanıma Sistemi Programı Kullanımı Hakkında Bilgi ] (https://github.com/ertugruldeniz/plakatanimasistemi/blob/master/Kullan%C4%B1m%C4%B1)
 
 - [Plaka Tanıma Sistemi Hakkında Raporu Okumak İçin Tıklaynız ](https://github.com/ertugruldeniz/plakatanimasistemi/blob/master/ErtugrulDeniz_Plaka_Tanima_Sistemi.pdf)
