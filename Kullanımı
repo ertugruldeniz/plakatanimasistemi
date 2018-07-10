@@ -1,6 +1,9 @@
-1- main.py dosyası çalıştırılır.
-2- Menden seçim işlemi yapılır 1 veya 2 
-3- Resim klasörü içerisindeki resim adı uzantısı ile beraber yazılarak plaka yeri bulunur.
+1- main.py dosyası çalıştırılır. Çalıştırmak için python main.py
 
+2- Karşınıza çıkan menüden seçim işlemi yapılır 1 veya 2 seçilebilir. 1 önceden tanımlanmış
+görüntüler için çalışır, 2 kamera açılıp kamera üzerinde bulmaya çalışır. 2.işlem şuan için çalışmamamktadır.
+
+3- Resim klasörü içerisindeki resim adı uzantısı ile beraber yazılarak plaka yeri bulunur.   Resim klasörü içerisinde bulunan 
+herhangi bir görüntüyü uzantısıile birlikte yazarsanız a.png şeklinde plaka tanıma işlemlerini gerçekleştirmektedir.
 
 Sürüm: Python3 - Opencv 3.3
