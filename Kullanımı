@@ -1,4 +1,5 @@
 Öncelikle programı çalıştırmadan önce bilgisayarınızda Python3 ve OpenCv kurulu olması gerekmektedir.
+Python numpy kütüphanesi yüklenmelidir.
 Bu kurumları gerçekleştirdikten sonra aşağıdaki işlemleri geçekleştirerek programı çalıştırabilirsiniz.
 
 1- main.py dosyası çalıştırılır. Çalıştırmak için python main.py
