@@ -5,9 +5,11 @@ Bu kurumları gerçekleştirdikten sonra aşağıdaki işlemleri geçekleştirer
 1- main.py dosyası çalıştırılır. Çalıştırmak için python main.py
 
 2- Karşınıza çıkan menüden seçim işlemi yapılır 1 veya 2 seçilebilir. 1 önceden tanımlanmış
-görüntüler için çalışır, 2 kamera açılıp kamera üzerinde bulmaya çalışır. 2.işlem şuan için çalışmamamktadır.
+görüntüler için çalışır, 2 kamera açılıp kamera üzerinde bulmaya çalışır. 2.işlem şuan için çalışmamaktadır.
 
 3- Resim klasörü içerisindeki resim adı uzantısı ile beraber yazılarak plaka yeri bulunur.   Resim klasörü içerisinde bulunan 
 herhangi bir görüntüyü uzantısıile birlikte yazarsanız a.png şeklinde plaka tanıma işlemlerini gerçekleştirmektedir.
 
+Not: Proje araç üzerinde plaka bölgesini bulma işlemine kadar yapılmış olup karakter tanıma konusunda işlemler yapılmamıştır. 
+Projeyi devam ettirerek karakter tanıma işlemini yapmak için Python Keras kullanmanızı öneririm. Kolay gelsin :)
 Sürüm: Python3 - Opencv 3.3
