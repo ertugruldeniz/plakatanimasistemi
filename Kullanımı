@@ -13,3 +13,9 @@ herhangi bir görüntüyü uzantısıile birlikte yazarsanız a.png şeklinde pl
 Not: Proje araç üzerinde plaka bölgesini bulma işlemine kadar yapılmış olup karakter tanıma konusunda işlemler yapılmamıştır. 
 Projeyi devam ettirerek karakter tanıma işlemini yapmak için Python Keras kullanmanızı öneririm. Kolay gelsin :)
 Sürüm: Python3 - Opencv 3.3
+
+
+Güncelleme
+
+22.10.2020 tarihinde plaka üzerindeki karakterleri bulan kodlar projeye dahil edilmiştir. Kodları kendi projenize dahil ederek karakter tanımlaması yapabilirsiniz.
+KNN algoritması makine öğrenmesi kullanılmıştır.
