@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plaka Tanıma Sonucu</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #0f172a;
+            --accent-color: #4f46e5;
+            --light-color: #f8fafc;
+            --dark-color: #0f172a;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            padding-top: 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.05)" points="0,100 100,0 100,100"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-title {
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero-subtitle {
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .section-title {
+            position: relative;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+        }
+        
+        .plate-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plate-card::before {
+            content: "\f1b9"; /* Car icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.05;
+            right: -20px;
+            bottom: -50px;
+        }
+        
+        .plate-number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background-color: white;
+            color: var(--dark-color);
+            padding: 0.5rem 2rem;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border: 2px solid rgba(0,0,0,0.1);
+        }
+        
+        .result-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .result-card .card-header {
+            padding: 1rem;
+            font-weight: 600;
+            background-color: rgba(37, 99, 235, 0.05);
+            color: var(--primary-color);
+            border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+        }
+        
+        .result-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            max-height: 200px;
+            padding: 0.5rem;
+        }
+        
+        .edit-plate-form {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            border-top: 5px solid var(--accent-color);
+        }
+        
+        .edit-plate-form h3 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .plate-input {
+            padding: 1rem;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background-color: var(--light-color);
+            border: 2px solid rgba(37, 99, 235, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            max-width: 250px;
+            transition: all 0.3s ease;
+        }
+        
+        .plate-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+            outline: none;
+        }
+        
+        .btn-update {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-update:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: rgba(255,255,255,0.7);
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        /* Plaka gösterimi için özel stil */
+        .plaka-sonuc {
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        
+        .plaka-gosterge {
+            background-color: rgb(255, 251, 235);
+            border: 2px solid #334155;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #334155;
+            text-align: center;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        
+        .plaka-etiket {
+            color: #64748b;
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .plaka-deger {
+            display: inline-block;
+            background-color: #f8fafc;
+            padding: 8px 20px;
+            border-radius: 5px;
+            border: 1px solid #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: var(--secondary-color);">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-car-alt me-2"></i>
+                Plaka Tanıma Sistemi
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start_camera"><i class="fas fa-camera me-1"></i> Kamera</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center animate__animated animate__fadeIn">
+        <div class="container position-relative">
+            <h1 class="hero-title">Plaka Tanıma Sonucu</h1>
+            <p class="hero-subtitle">Görüntü işleme sonucunda tespit edilen plaka</p>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <div class="container py-3">
+    
+        <!-- Plaka Sonucu -->
+        <div class="plate-card animate__animated animate__bounceIn">
+            <h4 class="mb-0">Tespit Edilen Plaka</h4>
+            <div class="plate-number">{{ plaka_metni }}</div>
+        </div>
+        
+        <!-- Plaka Düzenleme Formu -->
+        <div class="edit-plate-form animate__animated animate__fadeInUp">
+            <h3><i class="fas fa-edit me-2"></i>Plaka Düzeltme</h3>
+            <p class="text-muted">Tespit edilen plaka yanlışsa veya okunamadıysa, doğru plaka bilgisini girebilirsiniz:</p>
+            
+            <form action="/update_plaka" method="post" class="mt-4">
+                <div class="input-group">
+                    <input type="text" name="plaka_metni" class="plate-input" placeholder="Örn: 34ABC123" maxlength="10">
+                    <button type="submit" class="btn-update">
+                        <i class="fas fa-check-circle me-2"></i>Güncelle
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        {% if sonuclar %}
+        <!-- İşlem Adımları -->
+        <h2 class="section-title mt-5">Görüntü İşleme Adımları</h2>
+        <p class="text-muted mb-4">Plaka tespiti için uygulanan görüntü işleme algoritması adımları:</p>
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for baslik, resim in sonuclar %}
+            <div class="col animate__animated animate__fadeIn">
+                <div class="result-card">
+                    <div class="card-header">
+                        {{ baslik }}
+                    </div>
+                    <div class="card-body text-center p-2">
+                        <img src="data:image/jpeg;base64,{{ resim }}" alt="{{ baslik }}" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <!-- Butonlar -->
+        <div class="text-center mt-5">
+            <a href="/" class="btn btn-primary btn-lg">
+                <i class="fas fa-home me-2"></i>Ana Sayfaya Dön
+            </a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; 2025 Plaka Tanıma Sistemi - Tüm Hakları Saklıdır</p>
+            <p><small>Sürüm 2.0 - Modern UI</small></p>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Animate on scroll - her kart için kademeli animasyon -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.result-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animate__animated', 'animate__fadeInUp');
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plaka Tanıma Sistemi</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #0f172a;
+            --accent-color: #4f46e5;
+            --light-color: #f8fafc;
+            --dark-color: #0f172a;
+            --success-color: #10b981;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            padding-top: 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.05)" points="0,100 100,0 100,100"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-title {
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero-subtitle {
+            font-weight: 300;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            overflow: hidden;
+            border: none;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .card-header {
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            color: white;
+            font-weight: 600;
+            font-size: 1.3rem;
+            text-align: center;
+            padding: 1.5rem;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            margin: 15px 0;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            border: 2px dashed var(--primary-color);
+            border-radius: 10px;
+            background-color: rgba(37, 99, 235, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .file-upload:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+        
+        .file-upload input[type="file"] {
+            position: absolute;
+            font-size: 100px;
+            opacity: 0;
+            right: 0;
+            top: 0;
+            cursor: pointer;
+        }
+        
+        .file-upload i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: rgba(255,255,255,0.7);
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+        
+        .error-alert {
+            background-color: #ef4444;
+            color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            animation: shake 0.5s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+        
+        .container.py-5 {
+            padding-top: 1.5rem !important;
+            padding-bottom: 1.5rem !important;
+        }
+        
+        .mt-4 {
+            margin-top: 1rem !important;
+        }
+        
+        .mt-5 {
+            margin-top: 2rem !important;
+        }
+        
+        .pt-5 {
+            padding-top: 2rem !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: var(--secondary-color);">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-car-alt me-2"></i>
+                Plaka Tanıma Sistemi
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/"><i class="fas fa-home me-1"></i> Ana Sayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/start_camera"><i class="fas fa-camera me-1"></i> Kamera</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center animate__animated animate__fadeIn">
+        <div class="container position-relative">
+            <h1 class="hero-title">Plaka Tanıma Sistemi</h1>
+            <p class="hero-subtitle">Görüntü işleme teknolojisi ile araç plakalarını hızlı ve doğru şekilde tanıyın</p>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <div class="container py-3">
+        {% if error %}
+        <div class="error-alert">
+            <i class="fas fa-exclamation-circle me-2"></i> {{ error }}
+        </div>
+        {% endif %}
+        
+        <div class="row g-3 mt-2">
+            <!-- Resimden Tanıma -->
+            <div class="col-md-6 animate__animated animate__fadeInLeft">
+                <div class="feature-card">
+                    <div class="card-header">
+                        <i class="fas fa-image me-2"></i> Resimden Plaka Tanıma
+                    </div>
+                    <div class="card-body text-center p-3">
+                        <p>Resimdeki araç plakalarını otomatik olarak tanıyın ve analiz edin.</p>
+                        
+                        <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+                            <div class="file-upload">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p class="mb-0">Resmi seçmek için tıklayın veya sürükleyin</p>
+                                <small class="text-muted">(.jpg, .jpeg, .png formatında)</small>
+                                <input type="file" name="file" id="fileInput" accept=".jpg,.jpeg,.png" required>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100 mt-3">
+                                <i class="fas fa-search me-2"></i> Plaka Tanımayı Başlat
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kameradan Tanıma -->
+            <div class="col-md-6 animate__animated animate__fadeInRight">
+                <div class="feature-card">
+                    <div class="card-header">
+                        <i class="fas fa-video me-2"></i> Kameradan Plaka Tanıma
+                    </div>
+                    <div class="card-body text-center p-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <p>Canlı kamera görüntüsünden araç plakalarını gerçek zamanlı olarak tanıyın.</p>
+                        <a href="/start_camera" class="btn btn-primary w-100">
+                            <i class="fas fa-video me-2"></i> Kamerayı Başlat
+                        </a>
+                        <div class="mt-3">
+                            <small class="text-muted">* Kameranızın bağlı olduğundan emin olun</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Features Section -->
+        <div class="row mt-3 pt-3">
+            <div class="col-12 text-center mb-3">
+                <h2>Sistem Özellikleri</h2>
+                <p class="text-muted">Güçlü görüntü işleme teknolojilerimiz ile plaka tanıma işlemi hızlı ve güvenilir</p>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-shrink-0 me-3">
+                        <i class="fas fa-tachometer-alt text-primary fa-2x"></i>
+                    </div>
+                    <div>
+                        <h5>Hızlı Tanıma</h5>
+                        <p class="text-muted">Gelişmiş algoritmalar sayesinde milisaniyeler içinde plaka tespiti ve tanıma</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-shrink-0 me-3">
+                        <i class="fas fa-check-circle text-primary fa-2x"></i>
+                    </div>
+                    <div>
+                        <h5>Yüksek Doğruluk</h5>
+                        <p class="text-muted">Gelişmiş görüntü işleme teknikleri ile yüksek oranda doğruluk</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-shrink-0 me-3">
+                        <i class="fas fa-shield-alt text-primary fa-2x"></i>
+                    </div>
+                    <div>
+                        <h5>Güvenli Kullanım</h5>
+                        <p class="text-muted">Tüm veriler yerel olarak işlenir, hiçbir görüntü veya plaka bilgisi saklanmaz</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p>&copy; 2025 Plaka Tanıma Sistemi - Tüm Hakları Saklıdır</p>
+            <p><small>Sürüm 2.0 - Modern UI</small></p>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Dosya seçildiğinde görsel geri bildirim için
+        document.querySelector('input[type="file"]').addEventListener('change', function() {
+            if (this.files.length > 0) {
+                const parent = this.closest('.file-upload');
+                const fileNameDisplay = document.createElement('div');
+                
+                // Mevcut içeriği temizle ama input elementini koruyarak
+                Array.from(parent.children).forEach(child => {
+                    if (child.tagName !== 'INPUT') {
+                        child.remove();
+                    }
+                });
+                
+                // Yeni içerik ekle ama input elementini değiştirmeden
+                parent.style.borderColor = 'var(--success-color)';
+                parent.style.backgroundColor = 'rgba(16, 185, 129, 0.05)';
+                
+                // Dosya adını gösteren element
+                fileNameDisplay.innerHTML = `
+                    <i class="fas fa-check-circle" style="color: var(--success-color); font-size: 2rem; display: block; margin-bottom: 10px;"></i>
+                    <p class="mb-0" style="font-weight: 500;">${this.files[0].name}</p>
+                    <small class="text-muted">Seçilen dosya</small>
+                `;
+                
+                // Input elementinden önce yeni içeriği ekle
+                parent.insertBefore(fileNameDisplay, this);
+            }
+        });
+        
+        // Form gönderimi kontrolü
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            const fileInput = document.getElementById('fileInput');
+            
+            // Dosya seçilmiş mi kontrol et
+            if (fileInput.files.length === 0) {
+                e.preventDefault();
+                alert('Lütfen bir resim dosyası seçin.');
+                return false;
+            }
+            
+            // Dosya türü kontrolü
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+            if (!allowedTypes.includes(fileInput.files[0].type)) {
+                e.preventDefault();
+                alert('Lütfen geçerli bir resim dosyası seçin (.jpg, .jpeg, .png)');
+                return false;
+            }
+            
+            // Form gönderimi sırasında buton metni ve görünümünü değiştir
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Yükleniyor...';
+            submitButton.disabled = true;
+            
+            return true;
+        });
+    </script>
+</body>
+</html> 
