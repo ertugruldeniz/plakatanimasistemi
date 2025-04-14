@@ -239,6 +239,15 @@ Bu projeye katkıda bulunmak için:
   - Kullanıcı yetkilendirme ve erişim kontrolü
   - Şifrelenmiş veri depolama ve iletişim
 
+##Örnek Ekran Görüntüleri
+
+![image](https://github.com/user-attachments/assets/2ce679b4-69dd-4ee1-97fd-5a48ff2f92f6)
+![image](https://github.com/user-attachments/assets/3c4661fd-69f9-4d02-90d3-a83c368dbf0c)
+![image](https://github.com/user-attachments/assets/b83e7cf9-fdf0-4ee1-aa72-b537b0fcb2d9)
+![image](https://github.com/user-attachments/assets/857cf3da-a131-4e3f-adbb-6ec7ff8911de)
+![image](https://github.com/user-attachments/assets/ad855edf-af8d-4139-818a-5c3023d9b841)
+
+
 ## 📞 İletişim
 
 Ertuğrul Deniz
